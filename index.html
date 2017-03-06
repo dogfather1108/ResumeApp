@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/icons-extra.css"/>
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/swiper.css"/>
+    <link rel="stylesheet" type="text/css" href="css/animate.min.css"/>
+    <style type="text/css">
+    	.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+				
+			}
+			
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+			/**/
+			
+			.mui-preview-image.mui-fullscreen {
+				position: fixed;
+				z-index: 20;
+				background-color: #000;
+			}
+			.mui-preview-header,
+			.mui-preview-footer {
+				position: absolute;
+				width: 100%;
+				left: 0;
+				z-index: 10;
+			}
+			.mui-preview-header {
+				height: 44px;
+				top: 0;
+			}
+			.mui-preview-footer {
+				height: 50px;
+				bottom: 0px;
+			}
+			.mui-preview-header .mui-preview-indicator {
+				display: block;
+				line-height: 25px;
+				color: #fff;
+				text-align: center;
+				margin: 15px auto 4;
+				width: 70px;
+				background-color: rgba(0, 0, 0, 0.4);
+				border-radius: 12px;
+				font-size: 16px;
+			}
+			.mui-preview-image {
+				display: none;
+				-webkit-animation-duration: 0.5s;
+				animation-duration: 0.5s;
+				-webkit-animation-fill-mode: both;
+				animation-fill-mode: both;
+			}
+			.mui-preview-image.mui-preview-in {
+				-webkit-animation-name: fadeIn;
+				animation-name: fadeIn;
+			}
+			.mui-preview-image.mui-preview-out {
+				background: none;
+				-webkit-animation-name: fadeOut;
+				animation-name: fadeOut;
+			}
+			.mui-preview-image.mui-preview-out .mui-preview-header,
+			.mui-preview-image.mui-preview-out .mui-preview-footer {
+				display: none;
+			}
+			.mui-zoom-scroller {
+				position: absolute;
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+				-webkit-box-pack: center;
+				-webkit-justify-content: center;
+				justify-content: center;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				-webkit-backface-visibility: hidden;
+			}
+			.mui-zoom {
+				-webkit-transform-style: preserve-3d;
+				transform-style: preserve-3d;
+			}
+			.mui-slider .mui-slider-group .mui-slider-item img {
+				width: auto;
+				height: auto;
+				max-width: 100%;
+				max-height: 100%;
+			}
+			.mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+				width: 100%;
+			}
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+				display: inline-table;
+			}
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+				display: table-cell;
+				vertical-align: middle;
+			}
+			.mui-preview-loading {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				display: none;
+			}
+			.mui-preview-loading.mui-active {
+				display: block;
+			}
+			.mui-preview-loading .mui-spinner-white {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -25px;
+				margin-top: -25px;
+				height: 50px;
+				width: 50px;
+			}
+			.mui-preview-image img.mui-transitioning {
+				-webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+				transition: transform 0.5s ease, opacity 0.5s ease;
+			}
+			@-webkit-keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			@keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			} 
+			@-webkit-keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			@keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			p img {
+				max-width: 100%;
+				height: auto;
+			}
+			
+			/**/
+			.flex-container {
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-flex-flow: row wrap;
+				justify-content: space-between;
+				text-align: center;
+			}
+			
+			.mui-content-padded {
+				padding: 10px;
+			}
+			
+			.mui-content-padded a {
+				margin: 3px;
+				width: 50px;
+				height: 50px;
+				display: inline-block;
+				text-align: center;
+				background-color: #fff;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+			}
+			
+			.mui-content-padded a .mui-icon-extra {
+				margin-top: 12px;
+			}
+			
+			.mui-spinner,
+			.mui-spinner-white {
+				margin-top: 12px
+			}
+			
+			.active .mui-spinner-indicator {
+				background: #007AFF;
+			}
+			
+			.mui-content a {
+				color: #8F8F94;
+			}
+			
+			.mui-content a.active {
+				color: #007aff;
+			}
+    </style>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init({
+      		swipeBack:true
+      	});
+    </script>
+</head>
+<body>
+	 <div class="musi musi1" style="position: absolute;top: 10%;right: 10%;width: 50px;height: 50px;background: url(images/timg.jpg);background-size: 100% 100%;border-radius: 50%;z-index: 50"></div>
+	<div class="swiper-container"> 
+
+        <div class="parallax-bg" style="background-image:url(images/650aa1cdaf3fa648bd01be796d1d4ece.jpg)" data-swiper-parallax="-23%"></div>
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+
+                
+            
+                <div class="ani" swiper-animate-effect="rubberBand" swiper-animate-duration="2s" swiper-animate-delay="2s" style="width: 100% ;position:absolute;top: 30%;left: 10%"> <img style="width: 80%;" src="images/6c1b434c47e7385ac2112265863577d7.png"></div>
+                <div class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="2s" swiper-animate-delay="0.3s" style="width: 50%;height: 3px;background: #F6EAD0;position: absolute;top: 60%;left: 20%"></div>
+                <div class="ani" swiper-animate-effect="bounceInRight" swiper-animate-duration="2s" swiper-animate-delay="0.3s" style="width: 50%;height: 3px;background: #F3D6D6;position: absolute;top: 62%;left: 22%"></div>
+                <div class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="2s" swiper-animate-delay="0.3s" style="width: 50%;height: 3px;background: #CFE7CD;position: absolute;top: 64%;left: 24%"></div>
+                <div class="ani" swiper-animate-effect="zoomInLeft" swiper-animate-duration="1s" swiper-animate-delay="3s" style="width: 30%;position: absolute;top: 32%;left: 13%"><img style="width: 100%" src="images/770337202d4f3ba85f9dab709848420e.png"></div>
+            </div>
+            <div class="swiper-slide p1">
+                <img  class="pic1" style="width: 35%;position: absolute;left: 32%;top: 20%" src="images/91f200a13d5ab7368a4b43035027e2a7.png">
+                <img class="pic1" style="width: 35%;position: absolute;left: 5%;top: 50%" src="images/91f200a13d5ab7368a4b43035027e2a7.png">
+                <img class="pic1" style="width: 35%;position: absolute;right: 5%;top: 50%;" src="images/91f200a13d5ab7368a4b43035027e2a7.png">
+                <p class="ani" swiper-animate-effect="bounceInRight" swiper-animate-duration="2s" swiper-animate-delay="0.3s" style="top: 30%;left: 39%;" >姓名：黄诗静</p>
+                <p class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="2s" swiper-animate-delay="0.3s" style="top: 58%;left: 10%">求职岗位：web前端应用工程师</p>
+                <p class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="2s" swiper-animate-delay="0.3s" style="top: 59%;right: 7%">工作经验：2年</p>
+               <img src="images/459378e868da5a3324b46e93b5e0694c.png" style="width: 30%;position: absolute;left: 65%;bottom: 0;"  class="ani" swiper-animate-effect="bounceOutUp" swiper-animate-duration="6s" swiper-animate-delay="0.5s">
+               <img src="images/459378e868da5a3324b46e93b5e0694c.png" style="width: 30%;position: absolute;left: 35%;bottom: 0;"  class="ani" swiper-animate-effect="bounceOutUp" swiper-animate-duration="6s" swiper-animate-delay="0.3s">
+               <img src="images/459378e868da5a3324b46e93b5e0694c.png" style="width: 30%;position: absolute;left: 8%;bottom: 0;"  class="ani" swiper-animate-effect="bounceOutUp" swiper-animate-duration="6s" swiper-animate-delay="0.7s">
+            </div>
+   
+            <div class="swiper-slide">
+                <div style="position: absolute;top: 60%;right: 20%" class="ani" swiper-animate-effect="rubberBand" swiper-animate-duration="1s" swiper-animate-delay="2s"><button  id="enter">开启简历</button></div>
+                <div style="position: absolute;top: 40%;color: #57B2E0;left: 30%" class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="2s" swiper-animate-delay="0.1s">欢迎进入.......</div> 
+                 
+            </div>
+            
+        </div> 
+        <!-- Add Pagination -->
+        
+    </div>
+	
+	<!--Mui 所做的页面-->
+	<div id="mainContent">
+		
+		<div id= "bcid" ></div>
+		<div id="tuiChu" style="position: absolute;bottom: 10%;left: 0;right: 0;margin: 0 auto;width: 100px;height: 50px;opacity: 0.5;color: red;font-size: 14px;line-height: 50px;text-align: center;z-index: 200;background: black;display: none;border-radius: 50%;">
+			退出
+		</div>
+	<header class="mui-bar mui-bar-nav">
+			<a id="a1" class="mui-icon mui-icon-camera" onclick="captureImage()"></a>
+			<h1 class="mui-title" >My resume</h1>
+			<a id="a2" class="mui-icon mui-icon-extra mui-icon-extra-sweep mui-pull-right" onclick="erweima();"></a>
+			
+		</header>
+		
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active" href="#tabbar">
+				<span class="mui-icon mui-icon-gear"></span>
+				<span class="mui-tab-label">技能</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-chat">
+				<span class="mui-icon mui-icon-flag"></span>
+				<span class="mui-tab-label">经历</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-contact">
+				<span class="mui-icon mui-icon-star"></span>
+				<span class="mui-tab-label">项目</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-map">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">我</span>
+			</a>
+		</nav>
+		
+		<div class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				
+		<div class="mui-content">
+			<div id="tabbar" class="mui-control-content mui-active">
+				<div class="title">我的技能</div>
+				<div id="biaozhun">
+					<div class="title">标准</div>
+					<ul  class="mui-table-view" id="liCollapse" style="display: none;margin-top: 5px;" >
+					<li  class="mui-table-view-cell mui-collapse" >
+						<a href="javascript:;">
+							<img id="span5" class="mui-media-object mui-pull-left" src="./images/html.png">
+							<div class="mui-media-body">
+								<span id="spanI">
+									Sass
+								</span>
+								<p class='mui-ellipsis' id="spanD">CSS预编译</p>
+							</div>
+						</a>
+						<div class="mui-collapse-content" style="font-size: 14px;border-radius: 0 0 15% 0;">
+							<form class="mui-input-group">
+								 
+							
+								<ul class="mui-table-view" style="font-size: 12px;">
+									 <li class="mui-table-view-cell">类型：<span id="span1">工具</span></li>
+							         <li class="mui-table-view-cell">熟悉程度：<span id="span2">熟练</span></li>
+							         <li class="mui-table-view-cell">熟悉时间：<span id="span3">1年</span></li>
+							         <li class="mui-table-view-cell">相关介绍：<span id="span4">CSS预编译</span></li>
+								</ul>
+	
+							</form>
+						</div>
+					</li>
+					
+					
+					
+				
+
+				</ul>
+				</div>
+				<div id="guifan">
+					<div class="title">规范</div>
+				</div>
+				<div id="gongju">
+					<div class="title">工具</div>
+				</div>
+				<div id="shujuku">
+					<div class="title">数据库</div>
+				</div>
+				<div id="chajian">
+					<div class="title">插件</div>
+				</div>
+				
+				<div id="neiku">
+					<div class="title">类库</div>
+				</div>
+				
+				<div id="kuangjia">
+					<div class="title">框架</div>
+				</div>
+				
+				
+				
+				<div id="houtai">
+					<div class="title">后台</div>
+				</div>
+				
+				
+			</div>
+			<div id="tabbar-with-chat" class="mui-control-content">
+				<div class="title">我的经历</div>
+				<div class="mui-content">
+					<ul class="mui-table-view" style="border-radius: 10px 10px 50px 10px;">
+						<li class="mui-table-view-cell mui-media" style="height: 200px;">
+						<a href="javascript:;">
+							<img class="mui-media-object mui-pull-right" src="https://imgsa.baidu.com/baike/w%3D268/sign=7a769216845494ee8722081f15f4e0e1/4034970a304e251f1c62f751af86c9177e3e5385.jpg">
+							<div class="mui-media-body">
+								毕业于成都大学
+								<p class='mui-ellipsis'>2016/7</p>
+							</div>
+						</a>
+						<ul class="mui-table-view" style="margin-top: 10px;font-size: 13px;font-family: '微软雅黑';">
+				 <li class="mui-table-view-cell">专业：自动化</li>
+		         <li class="mui-table-view-cell">学校性质：全日制本科</li>
+		         <li class="mui-table-view-cell">学位：学士学位</li>
+			</ul>
+						</li>
+				</ul>
+					<div class="mui-content">
+			<div class="mui-content-padded">
+				<p>曾就职于杭州易网灵杰科技有限公司</p>
+				<p>公司性质：私营企业</p>
+				<p>在职时间：2008年-2010年</p>
+				<p>职位：技术副总</p>
+				<p>技术伙伴：30</p>
+				<p>参与项目：珍诚医药等</p>
+				<p>
+					<img src="./images/pic55.jpg" data-preview-src="./images/pic55.jpg" data-preview-group="1" />
+				</p>
+				<p>公司概况图</p>
+				<p>
+					<img src="./images/pic55.jpg" data-preview-src="./images/pic55.jpg" data-preview-group="1" />
+				</p>
+				<p> </p>
+				<p>
+					<img src="./images/pic55.jpg" data-preview-src="./images/pic55.jpg" data-preview-group="1" />
+				</p>
+			</div>
+		</div>
+				</div>
+				
+				
+			</div>
+			
+			<div id="tabbar-with-contact" class="mui-control-content">
+				<div class="title">我的项目</div>
+				<div id="pullsex">
+					
+				
+				<div id="poll" class="mui-card" style="display: none;margin-top: 10px;">
+				<div id="poll1" class="mui-card-header mui-card-media" style="height:40vw;background-image:url(./images/yuantiao.jpg);background-size: 100% auto;"></div>
+				<div class="mui-card-content" style="padding: 10px;">
+					<div class="mui-card-content-inner">
+						
+						<p id="poll2"></p>
+						<p id="poll3" style="color: #333;"></p>
+						<p id="poll4"></p>
+						<p id="poll5"></p>
+						<p id="poll6"></p>
+					</div>
+				</div>
+				<div class="mui-card-footer" style="padding: 10px;">
+					<a class="mui-card-link" id="poll7"></a>
+					
+				</div>
+			</div>
+				
+			</div>
+			</div>
+			<div id="tabbar-with-map" class="mui-control-content mui-content">
+				<div class="title">自我介绍</div>
+			
+				<div class="mui-content">
+			
+			<ul class="mui-table-view" >
+				<li class="mui-table-view-cell" >
+						<a href="javascript:;">
+							<img class="mui-media-object mui-pull-left" src="./images/pic55.jpg">
+							<div class="mui-media-body">
+								新垣结衣
+								<p class='mui-ellipsis'>ID:gakki</p>
+							</div>
+						</a>
+						
+				</li>
+				 <li class="mui-table-view-cell">
+				 	<span>出生日期：</span><span>1992/11/08</span>
+				 </li>
+		         <li class="mui-table-view-cell"><span>兴趣：</span><span>搬砖</span></li>
+		          <li class="mui-table-view-cell"><span>人品：</span><span>还行</span></li>
+		         <li class="mui-table-view-cell"><span>住址：</span><span>电十九</span></li>
+		          <li class="mui-table-view-cell"><span>phone：</span><span>13548225542</span></li>
+		         <li class="mui-table-view-cell"><span>婚恋情况：</span><span>单身</span></li>
+			</ul>
+			
+			<ul class="mui-table-view" style="margin-top: 35px;">
+			<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">个人展示</a>
+						<div class="mui-collapse-content">
+							<div id="slider" class="mui-slider">
+								<div class="mui-slider-group mui-slider-loop">
+									<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+									<div class="mui-slider-item mui-slider-item-duplicate">
+										<a href="#">
+											<img src="./images/pic34.jpg">
+										</a>
+									</div>
+									<!-- 第一张 -->
+									<div class="mui-slider-item">
+										<a href="#">
+											<img src="./images/pic31.jpg">
+										</a>
+									</div>
+									<!-- 第二张 -->
+									<div class="mui-slider-item">
+										<a href="#">
+											<img src="./images/pic32.jpg">
+										</a>
+									</div>
+									<!-- 第三张 -->
+									<div class="mui-slider-item">
+										<a href="#">
+											<img src="./images/pic33.jpg">
+										</a>
+									</div>
+									<!-- 第四张 -->
+									<div class="mui-slider-item">
+										<a href="#">
+											<img src="./images/pic34.jpg">
+										</a>
+									</div>
+									<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+									<div class="mui-slider-item mui-slider-item-duplicate">
+										<a href="#">
+											<img src="./images/pic31.jpg">
+										</a>
+									</div>
+								</div>
+								<div class="mui-slider-indicator">
+									<div class="mui-indicator mui-active"></div>
+									<div class="mui-indicator"></div>
+									<div class="mui-indicator"></div>
+									<div class="mui-indicator"></div>
+								</div>
+							</div>
+						</div>
+					</li>
+					
+					</ul>
+				
+					</div>
+</div>		
+					
+		</div>
+		</div>
+	
+	<script src="js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/mui.zoom.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/swiper.animate1.0.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		
+		mui('.mui-scroll-wrapper').scroll({
+			bounce: true,
+			//flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+		});
+		mui.previewImage();
+	</script>
+</body>
+</html>
